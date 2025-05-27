@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>3D IQ Peg Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>IQ Peg Game</h1>
+  <div id="controls">
+    <button onclick="resetGame()">Play Again</button>
+    <button id="tutorialBtn">How to Play?</button>
+    <span id="score">Score: 0</span>
+    <span id="highScore" class="badge">🏆 Best: 33 pegs — Room for improvement!</span>
+  </div>
+
+  <div id="board-container">
+    <div id="board"></div>
+  </div>
+
+  <div id="tutorialPopup" class="popup">
+  <div class="popup-content">
+    <h2>🧠 How to Play</h2>
+    <p>Select any peg to remove it first. Then jump over other pegs to remove them by clicking an empty spot two spaces away. Try to leave only one peg!</p>
+    <button onclick="hideTutorial()">Got it!</button>
+  </div>
+</div>
+
+
+  <div id="gameOverPopup">
+  <h2 id="popupTitle"></h2>
+  <p id="popupMessage"></p>
+  <button onclick="initBoard()">Play Again</button>
+</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
