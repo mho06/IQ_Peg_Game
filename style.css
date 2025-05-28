@@ -51,6 +51,9 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: transform 0.2s ease;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .peg.empty {
@@ -162,44 +165,25 @@ h1 {
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
-  #board {
-    grid-template-columns: repeat(7, 30px);
-    grid-template-rows: repeat(7, 30px);
-    gap: 4px;
-  }
-  .peg, .empty {
-    width: 30px;
-    height: 30px;
-  }
-}
-
-@media (max-width: 400px) {
-  #board {
-    grid-template-columns: repeat(7, 24px);
-    grid-template-rows: repeat(7, 24px);
-    gap: 3px;
-  }
-  .peg, .empty {
-    width: 24px;
-    height: 24px;
-  }
-}
-
-/* For small devices */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   #board-container {
-    width: 95vw;
-    height: 95vw;
-    max-width: none;
-    max-height: none;
+    width: 90vw;
+    height: 90vw;
     border-width: 4px;
     box-shadow: none;
   }
+
   #board {
-    gap: 3px;
+    gap: 2vw;
   }
+
   .peg {
-    border-width: 1.5px;
+    border-width: 1px;
+  }
+}
+
+@media (max-width: 480px) {
+  #board {
+    gap: 1.5vw;
   }
 }
