@@ -20,27 +20,33 @@ h1 {
 }
 
 #board-container {
-  width: 500px;
-  height: 500px;
+  width: 90vw;
+  height: 90vw;
+  max-width: 500px;
+  max-height: 500px;
   border-radius: 50%;
   background: radial-gradient(circle, #2196f3, #0d47a1);
-  border: 6px solid #003366; /* Clear visible border */
+  border: 6px solid #003366;
   display: flex;
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
   margin-top: 20px;
   position: relative;
+  box-sizing: border-box;
 }
 
 #board {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(7, 1fr);
-  width: 90%;
-  height: 90%;
-  gap: 10px;
+  gap: 3%;
+  padding: 5%;
+  box-sizing: border-box;
 }
+
 
 .peg {
   width: 100%;
