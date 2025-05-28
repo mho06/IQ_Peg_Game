@@ -20,21 +20,26 @@ h1 {
 }
 
 #board-container {
-  width: 90vw;
-  height: 90vw;
-  max-width: 500px;
-  max-height: 500px;
+  width: 500px;
+  height: 500px;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #c2a679, #7b5e33);
-  border: 8px solid #5c3d1e;
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4), 0 5px 20px rgba(0, 0, 0, 0.5);
+  background: radial-gradient(circle at center, #d2a679, #8b5c2c);
+  background-image: repeating-linear-gradient(
+    45deg,
+    #d2a679,
+    #d2a679 10px,
+    #c89f72 10px,
+    #c89f72 20px
+  );
+  border: 8px solid #5c4033;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.4), 0 0 30px rgba(0,0,0,0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
   position: relative;
-  box-sizing: border-box;
 }
+
 
 
 #board {
@@ -53,41 +58,42 @@ h1 {
   position: relative;
   width: 100%;
   height: 100%;
-  cursor: pointer;
   background: none;
+  cursor: pointer;
 }
 
 .peg::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: 5%;
   left: 50%;
   transform: translateX(-50%);
   width: 70%;
   height: 70%;
-  background: radial-gradient(circle at 30% 30%, #f9f871, #c5b600);
+  background: radial-gradient(circle at 30% 30%, #fff176, #fbc02d);
   border-radius: 50%;
-  border: 2px solid #4a4a00;
+  border: 2px solid #5d4e00;
   box-shadow:
-    inset -2px -2px 3px rgba(255, 255, 255, 0.6),
-    inset 2px 2px 4px rgba(0, 0, 0, 0.4),
-    0 4px 8px rgba(0, 0, 0, 0.5);
+    inset -3px -3px 5px rgba(255, 255, 255, 0.6),
+    inset 3px 3px 5px rgba(0, 0, 0, 0.3),
+    0 5px 10px rgba(0, 0, 0, 0.6);
   z-index: 2;
 }
 
 .peg::after {
   content: '';
   position: absolute;
-  top: 60%;
+  top: 65%;
   left: 50%;
   transform: translateX(-50%);
-  width: 20%;
-  height: 40%;
-  background: #3b3b00;
+  width: 15%;
+  height: 50%;
+  background: linear-gradient(to bottom, #3e3e3e, #000);
   border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.8);
   z-index: 1;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
 }
+
 
 .peg.empty::before,
 .peg.empty::after {
@@ -95,11 +101,15 @@ h1 {
 }
 
 .peg.empty {
-  background: radial-gradient(circle at 30% 30%, #2a2a2a, #000);
+  background: radial-gradient(circle at 30% 30%, #2c2c2c, #000);
   border-radius: 50%;
   box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.9);
 }
 
+
+.peg:hover::before {
+  box-shadow: 0 0 12px 4px rgba(255, 235, 59, 0.6);
+}
 
 
 
@@ -217,4 +227,22 @@ h1 {
   #board {
     gap: 1.5vw;
   }
+}
+
+#playAgainBtn {
+  background: linear-gradient(145deg, #4CAF50, #45a049);
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 6px 12px;  
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+#playAgainBtn:hover {
+  background: linear-gradient(145deg, #45a049, #4CAF50);
+  transform: scale(1.05);
 }

@@ -1,35 +1,29 @@
 const boardElement = document.getElementById("board");
-const scoreElement = document.getElementById("score");
-let highScore = 33; // 33 is worst (max pegs)
+const pegCountElement = document.getElementById("pegCount");
 const highScoreElement = document.getElementById("highScore");
 
+let highScore = 33;
 let board = [];
 let selected = null;
-let score = 0;
 let firstClick = true;
 
-// Generate a 7x7 board with pegs in cross shape
 function initBoard() {
   document.getElementById("gameOverPopup").style.display = "none";
-  document.getElementById("tutorialPopup").style.display = "none"; // hide tutorial too
+  document.getElementById("tutorialPopup").style.display = "none";
 
   board = Array(7).fill(null).map(() => Array(7).fill(null));
   selected = null;
-  score = 0;
   firstClick = true;
 
   for (let r = 0; r < 7; r++) {
     for (let c = 0; c < 7; c++) {
-      const isCross = (
-        (c >= 2 && c <= 4) || // vertical bar
-        (r >= 2 && r <= 4)    // horizontal bar
-      );
+      const isCross = (c >= 2 && c <= 4) || (r >= 2 && r <= 4);
       board[r][c] = isCross ? 1 : null;
     }
   }
 
   renderBoard();
-  updateScore();
+  updatePegCount();
   const storedHigh = parseInt(localStorage.getItem("highScore") || "33");
   updateHighScore(storedHigh);
 }
@@ -41,7 +35,7 @@ function renderBoard() {
     for (let c = 0; c < 7; c++) {
       if (board[r][c] === null) {
         const spacer = document.createElement("div");
-        spacer.style.visibility = "hidden"; // Maintain grid shape
+        spacer.style.visibility = "hidden";
         boardElement.appendChild(spacer);
         continue;
       }
@@ -80,7 +74,7 @@ function checkGameOver() {
             nr >= 0 && nr < 7 && nc >= 0 && nc < 7 &&
             board[nr][nc] === 0 && board[mr][mc] === 1
           ) {
-            return false; // Valid move exists
+            return false;
           }
         }
       }
@@ -88,14 +82,13 @@ function checkGameOver() {
   }
 
   const remainingPegs = countRemainingPegs();
-
-  // Check and update high score
   const currentBest = parseInt(localStorage.getItem("highScore") || "33");
+
   if (remainingPegs < currentBest) {
     localStorage.setItem("highScore", remainingPegs.toString());
   }
 
-  updateHighScore(remainingPegs); // ✅ FIXED: Call correct function
+  updateHighScore(remainingPegs);
 
   let title = `You ended up with ${remainingPegs} peg${remainingPegs !== 1 ? 's' : ''}.`;
   let message = "";
@@ -129,9 +122,10 @@ function showGameOverPopup(title, message) {
 
 function onPegClick(r, c) {
   if (firstClick) {
-    board[r][c] = 0; // remove the peg
+    board[r][c] = 0;
     firstClick = false;
     renderBoard();
+    updatePegCount();
     return;
   }
 
@@ -158,9 +152,8 @@ function onEmptyClick(r, c) {
       board[midR][midC] = 0;
       board[r][c] = 1;
 
-      score++;
-      updateScore();
-      checkGameOver(); // ✅ Ensure game over is checked
+      updatePegCount();
+      checkGameOver();
     }
   }
 
@@ -168,8 +161,9 @@ function onEmptyClick(r, c) {
   renderBoard();
 }
 
-function updateScore() {
-  scoreElement.textContent = `Score: ${score}`;
+function updatePegCount() {
+  const remaining = countRemainingPegs();
+  pegCountElement.textContent = `Pegs Left: ${remaining}`;
 }
 
 function updateHighScore(pegsLeft) {
@@ -195,6 +189,7 @@ function resetGame() {
 function showTutorial() {
   document.getElementById("tutorial").style.display = "block";
 }
+
 document.getElementById("tutorialBtn").addEventListener("click", () => {
   document.getElementById("tutorialPopup").style.display = "flex";
 });
@@ -203,5 +198,4 @@ function hideTutorial() {
   document.getElementById("tutorialPopup").style.display = "none";
 }
 
-// Initialize the game
 initBoard();
